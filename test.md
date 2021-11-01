@@ -3,7 +3,7 @@
 ### Enkelt program
 ```
 SELECT
-  <parameter>
+  <parameter1, parameter2, ...>
 FROM
   <tabell>
 ```
@@ -17,7 +17,7 @@ FROM
 ### Lägg till villkor
 ```
 SELECT
-  <parameter>
+  <parameter1, parameter2, ...>
 FROM
   <tabell>
 WHERE <villkor>
@@ -33,10 +33,10 @@ WHERE AppointmentDateTime >= '20210101'
 ### Koppla ihop tabeller
 ```
 SELECT
-  <parameter>
+  <tab1.parameter1, tab1.parameter2, tab2.parameter1, ...>
 FROM
-  <tabell>
-  INNER JOIN <tabell2> ON <villkor>
+  <tabell tab1>
+  INNER JOIN <tabell2 tab2> ON <villkor>
 WHERE <villkor>
 ```
 **Exempel 1 (obs parenteser)**
@@ -47,7 +47,7 @@ SELECT
 FROM 
   variandw.DWH.DimActivityTransaction dat
   INNER JOIN variandw.DWH.DimActivity da ON dat.DimActivityID = da.DimActivityID 
-WHERE AppointmentDateTime >= '20210101' AND (AppointmentStatus = 'Completed' OR AppointmentStatus = 'Manually Completed')
+WHERE dat.AppointmentDateTime >= '20210101' AND (da.AppointmentStatus = 'Completed' OR da.AppointmentStatus = 'Manually Completed')
 ```
 **Exempel 2**
 ```
@@ -57,5 +57,16 @@ SELECT
 FROM 
   variandw.DWH.DimActivityTransaction dat
   INNER JOIN variandw.DWH.DimActivity da ON dat.DimActivityID = da.DimActivityID 
-WHERE AppointmentDateTime >= '20210101' AND AppointmentStatus LIKE '%Completed'
+WHERE dat.AppointmentDateTime >= '20210101' AND da.AppointmentStatus LIKE '%Completed'
 ```
+## Villkor
+|Symbol|Betyder|Exempel||
+|-|-|-|-|
+|=|Lika med|AppointmentStatus = 'Completed'|Age = 37|
+|<>|Inte lika med|AppointmentStatus <> 'Deleted'|Age <> 37|
+|>|Större än|||
+|>|Större än eller lika med|||
+|<|Mindre än|||
+|<|Mindre än eller lika med|||
+
+
