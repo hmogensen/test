@@ -57,5 +57,5 @@ SELECT
 FROM 
   variandw.DWH.DimActivityTransaction dat
   INNER JOIN variandw.DWH.DimActivity da ON dat.DimActivityID = da.DimActivityID 
-WHERE AppointmentDateTime >= '20210101' AND **AppointmentStatus LIKE '%Completed'**
+WHERE AppointmentDateTime >= '20210101' AND AppointmentStatus LIKE '%Completed'
 ```
