@@ -60,13 +60,14 @@ FROM
 WHERE dat.AppointmentDateTime >= '20210101' AND da.AppointmentStatus LIKE '%Completed'
 ```
 ## Villkor
-|Symbol|Betyder|Exempel||
-|-|-|-|-|
-|=|Lika med|AppointmentStatus = 'Completed'|Age = 37|
-|<>|Inte lika med|AppointmentStatus <> 'Deleted'|Age <> 37|
-|>|Större än|||
-|>|Större än eller lika med|||
-|<|Mindre än|||
-|<|Mindre än eller lika med|||
+|Symbol|Betyder|Exempel|Exempel2||
+|-|-|-|-|-|
+|=|Lika med|AppointmentStatus = 'Completed'|Age = 37||
+|<>|Inte lika med|AppointmentStatus <> 'Deleted'|Age <> 37||
+|>|Större än||Age > 37||
+|>=|Större än eller lika med||Age >= 37||
+|<|Mindre än||Age < 37||
+|<=|Mindre än eller lika med||Age <= 37||
+|LIKE|Jämförelse för text|ActivityCategory LIKE '%Completed'||& fungerar som wildcard|
 
 
