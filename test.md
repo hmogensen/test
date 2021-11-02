@@ -47,7 +47,8 @@ SELECT
 FROM 
   variandw.DWH.DimActivityTransaction dat
   INNER JOIN variandw.DWH.DimActivity da ON dat.DimActivityID = da.DimActivityID 
-WHERE dat.AppointmentDateTime >= '20210101' AND (da.AppointmentStatus = 'Completed' OR da.AppointmentStatus = 'Manually Completed')
+WHERE dat.AppointmentDateTime >= '20210101' 
+AND (da.AppointmentStatus = 'Completed' OR da.AppointmentStatus = 'Manually Completed')
 ```
 **Exempel 2**
 ```
@@ -61,28 +62,19 @@ WHERE dat.AppointmentDateTime >= '20210101' AND da.AppointmentStatus LIKE '%Comp
 ```
 ### Sortera på parameter
 ```
-SELECT
-  <parameter1, parameter2, ...>
-FROM
-  <tabell>
-ORDER BY <parameter1>
+ORDER BY <parameter>
 ```
 **Exempel**
 ```
 SELECT
-  AppointmentDateTime
+  dat.AppointmentDateTime
 FROM
-  variandw.DWH.DimActivityTransaction
-WHERE AppointmentDateTime >= '20210101'
-ORDER BY AppointmentDateTime
+  variandw.DWH.DimActivityTransaction dat
+ORDER BY dat.AppointmentDateTime
 ```
 ### Välj max N värden
 ```
 SELECT TOP N
-  <parameter1, parameter2, ...>
-FROM
-  <tabell>
-ORDER BY <parameter1>
 ```
 **Exempel**
 ```
@@ -90,14 +82,10 @@ SELECT TOP 5
   dat.AppointmentDateTime
 FROM
   variandw.DWH.DimActivityTransaction dat
-ORDER BY dat.AppointmentDateTime
 ```
 ### Välj bara unika värden
 ```
 SELECT DISTINCT
-  <parameter1, parameter2, ...>
-FROM
-  <tabell>
 ```
 **Exempel**
 ```
@@ -117,6 +105,25 @@ FROM
 |<|Mindre än||Age < 37||
 |<=|Mindre än eller lika med||Age <= 37||
 |LIKE|Jämförelse för text|ActivityCategory LIKE '%Completed'||& fungerar som wildcard|
-
-
+## Mer tricks
+### Byt namn på variabler
+```
+<parameter> [nytt_parameter_namn]
+```
+**Exempel**
+```
+SELECT DISTINCT
+  dat.AppointmentDateTime [StartTime],
+  dat.ActivityCategoryENU [Activity]
+FROM
+  variandw.DWH.DimActivityTransaction dat
+```
+### Nesting
+**Exempel**
+```
+```
+### Cross apply
+**Exempel**
+```
+```
 
