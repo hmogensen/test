@@ -36,7 +36,7 @@ SELECT
   <tab1.parameter1, tab1.parameter2, tab2.parameter1, ...>
 FROM
   <tabell tab1>
-  INNER JOIN <tabell2 tab2> ON <villkor>
+  INNER JOIN <tabell2 tab2> ON <sammankopplingsvillkor>
 WHERE <villkor>
 ```
 **Exempel 1 (obs parenteser)**
@@ -59,7 +59,55 @@ FROM
   INNER JOIN variandw.DWH.DimActivity da ON dat.DimActivityID = da.DimActivityID 
 WHERE dat.AppointmentDateTime >= '20210101' AND da.AppointmentStatus LIKE '%Completed'
 ```
-## Villkor
+### Sortera på parameter
+```
+SELECT
+  <parameter1, parameter2, ...>
+FROM
+  <tabell>
+ORDER BY <parameter1>
+```
+**Exempel**
+```
+SELECT
+  AppointmentDateTime
+FROM
+  variandw.DWH.DimActivityTransaction
+WHERE AppointmentDateTime >= '20210101'
+ORDER BY AppointmentDateTime
+```
+### Välj max N värden
+```
+SELECT TOP N
+  <parameter1, parameter2, ...>
+FROM
+  <tabell>
+ORDER BY <parameter1>
+```
+**Exempel**
+```
+SELECT TOP 5
+  dat.AppointmentDateTime
+FROM
+  variandw.DWH.DimActivityTransaction dat
+ORDER BY dat.AppointmentDateTime
+```
+### Välj bara unika värden
+```
+SELECT DISTINCT
+  <parameter1, parameter2, ...>
+FROM
+  <tabell>
+```
+**Exempel**
+```
+SELECT DISTINCT
+  dat.AppointmentDateTime,
+  dat.ActivityCategoryENU
+FROM
+  variandw.DWH.DimActivityTransaction dat
+```
+## Jämförelse
 |Symbol|Betyder|Exempel|Exempel2||
 |-|-|-|-|-|
 |=|Lika med|AppointmentStatus = 'Completed'|Age = 37||
@@ -69,5 +117,6 @@ WHERE dat.AppointmentDateTime >= '20210101' AND da.AppointmentStatus LIKE '%Comp
 |<|Mindre än||Age < 37||
 |<=|Mindre än eller lika med||Age <= 37||
 |LIKE|Jämförelse för text|ActivityCategory LIKE '%Completed'||& fungerar som wildcard|
+
 
 
